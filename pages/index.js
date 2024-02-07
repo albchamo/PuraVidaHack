@@ -53,7 +53,7 @@ return (
                 variant="h5" 
                 component="h2" 
                 gutterBottom>
-                "La Sele Web3" de Costa Rica
+                La Sele Web3 de Costa Rica
             </Typography>
             <Typography variant="body1" gutterBottom>
                 Somos una DAO que busca fomentar la participación de Costarricenses en hackathons, eventos y productos web3 a nivel global.
