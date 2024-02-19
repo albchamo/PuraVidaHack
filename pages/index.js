@@ -1,6 +1,23 @@
 // pages/index.js
 import * as React from 'react';
-import { Container, Typography, Box, Card, CardContent, CardMedia, Button, Grid } from '@mui/material';
+import { useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Link from '@mui/material/Link';
+import MenuIcon from '@mui/icons-material/Menu';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 export default function Index() {
 
@@ -27,12 +44,83 @@ export default function Index() {
     transition: 'transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out', // Smooth transition for hover effect
     };
 
-return (
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+return ( 
+<>
+<AppBar position="sticky" color="primary">
+                <Toolbar>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        Pura Vida Hack DAO
+                    </Typography>
+                    {isMobile ? (
+                        <>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                color="inherit"
+                                aria-label="menu"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleMenu}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={handleClose}
+                            >
+                                <MenuItem onClick={handleClose}>
+                                    <Link href="https://discord.gg/WeWnycFzRb" target="_blank" rel="noopener noreferrer" color="inherit">
+                                        Join Discord
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem onClick={handleClose}>
+                                    <Link href="https://app.aragon.org/#/daos/polygon/0xb1f450172c3cd65485d625e4379cbbfc80ae5a9d/dashboard" target="_blank" rel="noopener noreferrer" color="inherit">
+                                        DAO Dashboard
+                                    </Link>
+                                </MenuItem>
+                            </Menu>
+                        </>
+                    ) : (
+                        // Display regular links for larger screens
+                        <>
+                            <Link href="https://discord.gg/WeWnycFzRb" target="_blank" rel="noopener noreferrer" color="inherit" sx={{ margin: 1 }}>
+                                Join Discord
+                            </Link>
+                            <Link href="https://app.aragon.org/#/daos/polygon/0xb1f450172c3cd65485d625e4379cbbfc80ae5a9d/dashboard" target="_blank" rel="noopener noreferrer" color="inherit" sx={{ margin: 1 }}>
+                                DAO Dashboard
+                            </Link>
+                        </>
+                    )}
+                </Toolbar>
+            </AppBar>
     <Container maxWidth="lg">
         <Box my={4} textAlign="center">
-            <Typography variant="h3" component="h1" gutterBottom>
-            Pura Vida Hack DAO
-             </Typography>
+
     {/* Use sx prop for styling instead of inline style for better responsiveness */}
             <Box sx={{  
             display: 'flex', // Flexbox container for centering child
@@ -112,5 +200,6 @@ return (
             </Button>
         </Box>
     </Container>
+    </>
   );
 }

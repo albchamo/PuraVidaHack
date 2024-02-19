@@ -4,19 +4,41 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Head from 'next/head';
 
-// Create a custom theme.
 const theme = createTheme({
   palette: {
-    // Define your palette here
     primary: {
-      main: '#43B96F',
+      main: '#000000', // Stark black for brutalist contrast
     },
-    secondary: {
-      main: '#19857b',
+    background: {
+      default: '#e0e0e0', // A light gray background
     },
-    // Add more colors as needed
+    text: {
+      primary: '#000000', // Black text for readability
+      secondary: '#5f5f5f', // Dark gray for less important text
+    },
   },
-  // You can also customize typography, breakpoints, etc.
+  typography: {
+    fontFamily: '"IBM Plex Mono", monospace', // Monospaced font for brutalist design
+    h1: {
+      fontWeight: 700, // Bold weight for headings
+    },
+    button: {
+      fontWeight: 700, // Bold weight for CTAs
+    },
+  },
+  shape: {
+    borderRadius: 0, // Square edges
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none', // No shadow for a flat design
+        },
+      },
+    },
+  },
+  // ...other overrides
 });
 
 function MyApp({ Component, pageProps }) {
